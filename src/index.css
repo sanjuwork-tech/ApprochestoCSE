@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #4A90E2;
+  --brand-clay: #D4A373;
+  --brand-sage: #A8D5BA;
+  --brand-paper: #F9F9F9;
+  --text-slate: #1E293B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--brand-paper);
+  color: var(--text-slate);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(74, 144, 226, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .hero-mesh {
+    position: absolute;
+    inset: -40px;
+    pointer-events: none;
+    opacity: 0.08;
+    filter: blur(40px);
+  }
+
+  .hero-blob {
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(74, 144, 226, 1), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(168, 213, 186, 1), transparent 60%);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .hero-blob--1 {
+    left: -20vmax;
+    top: -25vmax;
+    animation: meshFloat1 18s ease-in-out infinite;
+  }
+
+  .hero-blob--2 {
+    right: -25vmax;
+    top: -10vmax;
+    animation: meshFloat2 20s ease-in-out infinite;
+  }
+
+  .hero-blob--3 {
+    left: 10vmax;
+    bottom: -30vmax;
+    animation: meshFloat3 22s ease-in-out infinite;
+  }
+
+  .progress-fill {
+    width: 0%;
+    animation: progressFill 1.4s ease-out forwards;
+  }
+
+  .check-pop {
+    animation: checkPop 900ms ease-out both;
+  }
+}
+
+@keyframes meshFloat1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6vmax, 4vmax, 0) scale(1.05);
+  }
+}
+
+@keyframes meshFloat2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-7vmax, 5vmax, 0) scale(1.03);
+  }
+}
+
+@keyframes meshFloat3 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3vmax, -6vmax, 0) scale(1.06);
+  }
+}
+
+@keyframes progressFill {
+  to {
+    width: 70%;
+  }
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-mesh {
+    opacity: 0.06;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-blob--1,
+  .hero-blob--2,
+  .hero-blob--3 {
+    animation: none;
+  }
+
+  .progress-fill {
+    animation: none;
+    width: 70%;
+  }
+
+  .check-pop {
+    animation: none;
+  }
+}

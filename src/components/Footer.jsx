@@ -58,7 +58,7 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t border-white/10">
           <p className="text-xs text-slate-500">
-            © 2025 Approaches to CSE. Made with ❤ for India.
+            © 2025 Approaches to CSE. Made with ❤️ for India.
           </p>
         </div>
       </div>

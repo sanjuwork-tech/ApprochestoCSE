@@ -25,7 +25,7 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['error', { 
         varsIgnorePattern: '^[A-Z_]',
-        argsIgnorePattern: '^(?!_)[a-z]', // Allow underscore-prefixed args
+        argsIgnorePattern: '^_', // Allow underscore-prefixed args
       }],
     },
   },

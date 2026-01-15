@@ -1,18 +1,24 @@
-import MeshGradientBackground from './hero/MeshGradientBackground'
 import HeroContent from './hero/HeroContent'
-import GlassCard from './hero/GlassCard'
+import DigitalDiya from './hero/DigitalDiya'
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white" aria-labelledby="hero-heading">
-      <MeshGradientBackground />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-          <div className="lg:col-span-2">
+    <section 
+      className="relative overflow-hidden bg-off-white"
+      aria-labelledby="hero-heading"
+    >
+      {/* Clean background - no watermark */}
+      
+      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column - Typography (45% on desktop) */}
+          <div className="lg:col-span-5">
             <HeroContent />
           </div>
-          <div className="lg:col-span-3 flex justify-center lg:justify-end">
-            <GlassCard />
+          
+          {/* Right Column - Digital Diya (55% on desktop) */}
+          <div className="lg:col-span-7 flex items-center justify-center min-h-[500px] md:min-h-[600px]">
+            <DigitalDiya />
           </div>
         </div>
       </div>

@@ -1,20 +1,29 @@
 import { useState } from 'react'
 import { motion as Motion, AnimatePresence } from 'framer-motion'
 import { 
-  Home, 
+  LayoutDashboard, 
   BookOpen, 
-  FileText, 
-  BarChart3, 
-  ChevronDown, 
-  ChevronRight,
-  Briefcase,
+  Newspaper, 
+  BarChart3,
   Menu,
   X,
   TrendingUp
 } from 'lucide-react'
 
+// SVG Diya Icon
+const DiyaIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C12.5 3.5 13 5 13 6.5C14 7 15 8 15 9.5C16 10 17 11 17 12.5C17 14 16 15.5 15 16.5C14 17.5 13 18.5 12 19.5C11 18.5 10 17.5 9 16.5C8 15.5 7 14 7 12.5C7 11 8 10 9 9.5C9 8 10 7 11 6.5C11 5 11.5 3.5 12 2Z" fill="#C59B76"/>
+  </svg>
+)
+
 const menuItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: Home, active: true },
+  { 
+    id: 'dashboard', 
+    label: 'Dashboard', 
+    icon: LayoutDashboard, 
+    active: true 
+  },
   { 
     id: 'syllabus', 
     label: 'My Syllabus', 
@@ -26,7 +35,7 @@ const menuItems = [
       { id: 'gs4', label: 'GS4 - Ethics', progress: 90 },
     ]
   },
-  { id: 'editorials', label: 'Daily Editorials', icon: FileText },
+  { id: 'editorials', label: 'Daily Editorials', icon: Newspaper },
   { id: 'tests', label: 'Tests & Analytics', icon: BarChart3 },
 ]
 
@@ -42,13 +51,11 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-100 z-30 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 z-30 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-ethos-gold/10 flex items-center justify-center">
-            <div className="w-5 h-5 rounded-full" style={{ background: '#C59B76' }} />
-          </div>
-          <span className="font-playfair font-bold text-lg text-text-dark">
-            Dharma
+          <DiyaIcon className="w-6 h-6" />
+          <span className="font-serif font-bold text-lg text-slate-900">
+            Approaches
           </span>
         </div>
         <button
@@ -57,9 +64,9 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6 text-text-dark" strokeWidth={1.5} />
+            <X className="w-5 h-5 text-slate-700" strokeWidth={1.5} />
           ) : (
-            <Menu className="w-6 h-6 text-text-dark" strokeWidth={1.5} />
+            <Menu className="w-5 h-5 text-slate-700" strokeWidth={1.5} />
           )}
         </button>
       </div>
@@ -73,23 +80,21 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         className={`
-          fixed lg:sticky top-0 left-0 h-screen w-[260px] bg-white border-r border-slate-100 z-50
+          fixed lg:sticky top-0 left-0 h-screen w-64 bg-white border-r border-slate-200 z-50
           lg:translate-x-0 lg:opacity-100
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         {/* Logo */}
-        <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-100">
-          <div className="w-8 h-8 rounded-lg bg-ethos-gold/10 flex items-center justify-center">
-            <div className="w-5 h-5 rounded-full" style={{ background: '#C59B76' }} />
-          </div>
-          <span className="font-playfair font-bold text-xl text-text-dark">
-            Dharma
+        <div className="h-16 flex items-center gap-2.5 px-5 border-b border-slate-100">
+          <DiyaIcon className="w-6 h-6" />
+          <span className="font-serif font-bold text-xl text-slate-900">
+            Approaches
           </span>
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-1" role="navigation" aria-label="Main navigation">
+        <nav className="p-3 space-y-0.5" role="navigation" aria-label="Main navigation">
           {menuItems.map((item) => (
             <div key={item.id}>
               {item.children ? (
@@ -97,24 +102,19 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
                   <button
                     onClick={() => toggleExpand(item.id)}
                     className={`
-                      w-full flex items-center justify-between px-4 py-3 rounded-xl
-                      transition-all duration-200
+                      w-full flex items-center justify-between px-3 py-2.5 rounded-lg
+                      transition-all duration-150
                       ${item.active 
-                        ? 'bg-primary-blue/10 text-primary-blue' 
-                        : 'text-text-medium hover:bg-slate-50 hover:text-text-dark'
+                        ? 'bg-blue-50 text-blue-600' 
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                       }
                     `}
                     aria-expanded={expandedItems.includes(item.id)}
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="w-5 h-5" strokeWidth={1.5} />
-                      <span className="font-medium">{item.label}</span>
+                      <span className="text-sm font-medium">{item.label}</span>
                     </div>
-                    {expandedItems.includes(item.id) ? (
-                      <ChevronDown className="w-4 h-4" strokeWidth={1.5} />
-                    ) : (
-                      <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
-                    )}
                   </button>
                   
                   <AnimatePresence>
@@ -123,25 +123,25 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.15 }}
                         className="overflow-hidden"
                       >
-                        <div className="pl-12 pr-4 py-2 space-y-1">
+                        <div className="pl-11 pr-3 py-1.5 space-y-0.5">
                           {item.children.map((child) => (
                             <a
                               key={child.id}
                               href={`#${child.id}`}
-                              className="flex items-center justify-between py-2 px-3 rounded-lg text-sm text-text-medium hover:text-primary-blue transition-colors"
+                              className="flex items-center justify-between py-2 px-2.5 rounded-md text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
                             >
                               <span>{child.label}</span>
                               <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div className="w-12 h-1 bg-slate-100 rounded-full overflow-hidden">
                                   <div 
-                                    className="h-full bg-primary-blue rounded-full transition-all duration-500"
+                                    className="h-full bg-blue-500 rounded-full transition-all duration-300"
                                     style={{ width: `${child.progress}%` }}
                                   />
                                 </div>
-                                <span className="text-xs text-text-light">{child.progress}%</span>
+                                <span className="text-xs text-slate-400 w-7">{child.progress}%</span>
                               </div>
                             </a>
                           ))}
@@ -154,63 +154,51 @@ export default function Sidebar({ isMobileMenuOpen, setIsMobileMenuOpen }) {
                 <a
                   href={`#${item.id}`}
                   className={`
-                    flex items-center gap-3 px-4 py-3 rounded-xl
-                    transition-all duration-200
+                    flex items-center gap-3 px-3 py-2.5 rounded-lg
+                    transition-all duration-150
                     ${item.active 
-                      ? 'bg-primary-blue/10 text-primary-blue' 
-                      : 'text-text-medium hover:bg-slate-50 hover:text-text-dark'
+                      ? 'bg-blue-50 text-blue-600' 
+                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     }
                   `}
                 >
                   <item.icon className="w-5 h-5" strokeWidth={1.5} />
-                  <span className="font-medium">{item.label}</span>
+                  <span className="text-sm font-medium">{item.label}</span>
                 </a>
               )}
             </div>
           ))}
         </nav>
 
-        {/* Career Safety Net Widget */}
-        <div className="absolute bottom-6 left-4 right-4">
-          <div className="bg-gradient-to-br from-primary-blue to-brand-blue rounded-2xl p-5 text-white">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white/20 rounded-lg">
-                <Briefcase className="w-5 h-5" strokeWidth={1.5} />
+        {/* Shadow Resume Widget - Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-100 bg-white">
+          <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-1.5 bg-emerald-100 rounded-lg">
+                <TrendingUp className="w-4 h-4 text-emerald-600" strokeWidth={1.5} />
               </div>
-              <div>
-                <p className="text-xs text-white/80">Career Safety Net</p>
-                <p className="font-semibold">Level 3/5</p>
+              <span className="text-xs font-semibold text-slate-700">Corp. Readiness</span>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="mb-2">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs text-slate-500">Level 3/5 Achieved</span>
+                <span className="text-xs font-semibold text-emerald-600">70%</span>
+              </div>
+              <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                <Motion.div 
+                  className="h-full bg-emerald-500 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: '70%' }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                />
               </div>
             </div>
             
-            {/* Progress Ring */}
-            <div className="relative w-16 h-16 mx-auto mb-3">
-              <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
-                <circle
-                  cx="18"
-                  cy="18"
-                  r="16"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="2"
-                />
-                <circle
-                  cx="18"
-                  cy="18"
-                  r="16"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="75 100"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6" strokeWidth={1.5} />
-              </div>
-            </div>
-            
-            <p className="text-center text-sm font-medium">Corp. Readiness: Good</p>
+            <p className="text-xs text-slate-500">
+              Complete Ethics module to unlock Decision Making
+            </p>
           </div>
         </div>
       </Motion.aside>
